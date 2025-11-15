@@ -41,3 +41,12 @@ pub fn select_range<'a>(buffer: &'a str, start: usize, end: usize) -> Option<&'a
 
     Some(&buffer[from..to])
 }
+
+pub fn split_once<'a>(input: &'a str, delimiter: char) -> Option<(&'a str, &'a str)> {
+    match input.find(delimiter) {
+        Some(position) => {
+            return Some((&input[..position], &input[position + delimiter.len_utf8()..]))
+        },
+        None => return None
+    }
+}
