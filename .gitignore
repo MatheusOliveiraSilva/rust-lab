@@ -1,0 +1,35 @@
+# Rust / Cargo
+/target/
+**/target/
+
+# Build artifacts
+**/*.rlib
+**/*.rmeta
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+*.dSYM
+
+# Editor / IDE
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*~
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
+
+# Coverage / packaging
+coverage/
+pkg/
+
+# Nota: Para projetos binários é comum commitar Cargo.lock; para bibliotecas, normalmente não.
+.env
