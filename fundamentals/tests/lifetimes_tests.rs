@@ -1,4 +1,4 @@
-use fundamentals::lifetimes::{take_slice, select_range};
+use fundamentals::lifetimes::{take_slice, select_range, split_once};
 
 #[test]
 fn test_basic_take_slice() {
@@ -62,4 +62,42 @@ fn test_select_range() {
     let (start, end) = (25, 2);
     let result = select_range(buffer, start, end);
     assert_eq!(result, None);
+}
+
+#[test]
+fn test_split_once() {
+    let input = "a=b";
+    let delimiter = '=';
+    let (part1, part2) = split_once(input, delimiter).unwrap();
+    assert_eq!(part1, "a");
+    assert_eq!(part2, "b");
+
+    let input = "=abc";
+    let delimiter = '=';
+    let (part1, part2) = split_once(input, delimiter).unwrap();
+    assert_eq!(part1, "");
+    assert_eq!(part2, "abc");
+
+    let input = "abc=";
+    let delimiter = '=';
+    let (part1, part2) = split_once(input, delimiter).unwrap();
+    assert_eq!(part1, "abc");
+    assert_eq!(part2, "");
+
+    let input = "abc";
+    let delimiter = '=';
+    let result = split_once(input, delimiter);
+    assert_eq!(result, None);
+
+    let input = "á=é";
+    let delimiter = '=';
+    let (part1, part2) = split_once(input, delimiter).unwrap();
+    assert_eq!(part1, "á");
+    assert_eq!(part2, "é");
+
+    let input = "a=b=c";
+    let delimiter = '=';
+    let (part1, part2) = split_once(input, delimiter).unwrap();
+    assert_eq!(part1, "a");
+    assert_eq!(part2, "b=c");
 }
