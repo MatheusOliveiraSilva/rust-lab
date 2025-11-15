@@ -1,4 +1,4 @@
-use fundamentals::lifetimes::{take_slice, select_range, split_once};
+use fundamentals::lifetimes::{take_slice, select_range, split_once, common_prefix};
 
 #[test]
 fn test_basic_take_slice() {
@@ -100,4 +100,13 @@ fn test_split_once() {
     let (part1, part2) = split_once(input, delimiter).unwrap();
     assert_eq!(part1, "a");
     assert_eq!(part2, "b=c");
+}
+
+#[test]
+fn test_common_prefixes() {
+    assert_eq!(common_prefix("abcxkzka", "abcaodko"), "abc");
+    assert_eq!(common_prefix("hello", "xyz"), "");
+    assert_eq!(common_prefix("abc", "abcaodko"), "abc");
+    assert_eq!(common_prefix("abcxkzka", "abc"), "abc");
+    assert_eq!(common_prefix("áé", "áx"), "á");
 }
