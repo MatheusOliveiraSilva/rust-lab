@@ -50,3 +50,13 @@ pub fn split_once<'a>(input: &'a str, delimiter: char) -> Option<(&'a str, &'a s
         None => return None
     }
 }
+
+pub fn common_prefix<'a>(a: &'a str, b: &'a str) -> &'a str {
+    a.char_indices()
+        .zip(b.char_indices())
+        .take_while(| ((_, ca), (_, cb)) | ca == cb )
+        .map(| ((i, ca), _) | i + ca.len_utf8())
+        .last()
+        .map(|end| &a[..end])
+        .unwrap_or("")
+}
